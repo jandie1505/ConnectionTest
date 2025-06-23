@@ -45,12 +45,12 @@ func ping(url string, logPath string) {
 	}
 
 	timestamp := time.Now().Format("2006-01-02 15-04-05")
-	fmt.Println(fmt.Sprintf("%d %s %s", count, status, timestamp))
+	fmt.Println(fmt.Sprintf("%d %s %s %d", count, status, timestamp, url))
 
 	f, _ := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	defer f.Close()
 
-	_, err = f.WriteString(fmt.Sprintf("%d %s %s\n", count, timestamp, status))
+	_, err = f.WriteString(fmt.Sprintf("%d %s %s %s\n", count, timestamp, status, url))
 	if err != nil {
 		log.Fatal(err)
 		return
